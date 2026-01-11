@@ -28,4 +28,4 @@ jobs:
     - name: Run tests with HTML report
       run: |
         mkdir -p reports
-        pytest --html=reports/report.html
+        pytest --html=reports/report.html --headed=false
