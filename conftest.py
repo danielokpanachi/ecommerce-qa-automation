@@ -16,14 +16,14 @@ def page(request):
         
         rep = getattr(request.node, "rep_call", None)
         if rep and rep.outcome == "failed":
-            test_name = request.node.name
-            screenshot_path = f"screenshots/{test_name}.png"
+            screenshot_path = f"screenshots/{request.node.name}.png"
             page.screenshot(path=screenshot_path)
 
         browser.close()
 
 
+@pytest.hookimpl(hookwrapper=True, trylast=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
-    setattr(item, "rep_" + call.when, call)
+    setattr(item, "rep_" + rep.when, rep)
