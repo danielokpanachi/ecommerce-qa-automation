@@ -6,12 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# .github/workflows/python-tests.yml @ ref fb60c01528aec10205bcf958a21ebd318d9373b9
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright/python:v1.42.0-jammy
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
