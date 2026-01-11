@@ -71,9 +71,16 @@ Limittions
 This is a demo site; some features (login, checkout) are not automated due to captcha / no sandbox.
 Quantity input IDs are hardcoded from the demo site and may change.
 
+## Planned Improvements
+- Embed Playwright screenshots into pytest-html reports
+- Add browser matrix (Chromium, Firefox)
+- Cache Playwright browsers in GitHub Actions
+
+
+
 
 ---
- Author / Contact
+ Author, Contact
 Your Daniel Okpanachi
 Email: kingdan65@gmail.com
 GitHub: https://github.com/danielokpanachi
