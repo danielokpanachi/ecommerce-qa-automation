@@ -26,6 +26,4 @@ def page(request):
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
-    
-    
-        setattr(item, "rep_" + call.when, call)
+    setattr(item, "rep_" + call.when, call)
