@@ -27,5 +27,13 @@ jobs:
 
     - name: Run tests with HTML report
       run: |
-        mkdir -p reports
-        pytest --html=reports/report.html --headed=false
+         # Ensure virtual X server helper is available
+         sudo apt-get update
+         sudo apt-get install -y xvfb
+
+         python -m pip install --upgrade pip
+         pip install -r requirements.txt
+         playwright install --with-deps
+
+         mkdir -p reports
+         xvfb-run -s "-screen 0 1920x1080x24" pytest --html=reports/report.html
