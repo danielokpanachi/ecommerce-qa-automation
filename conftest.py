@@ -14,14 +14,18 @@ def page(request):
         page = browser.new_page()
         yield page
         
-        if request.node.rep_call.failed:
+        rep = getattr(request.node, "rep_call", None)
+        if rep and rep.outcome == "failed":
             test_name = request.node.name
             screenshot_path = f"screenshots/{test_name}.png"
             page.screenshot(path=screenshot_path)
+
         browser.close()
 
 
 def pytest_runtest_makereport(item, call):
-   
-    if "page" in item.fixturenames:
+    outcome = yield
+    rep = outcome.get_result()
+    
+    
         setattr(item, "rep_" + call.when, call)
