@@ -29,9 +29,10 @@ jobs:
           elif apt-cache show libasound2t64 >/dev/null 2>&1; then
             sudo apt-get install -y --no-install-recommends libasound2t64
           else
-            echo "libasound package not found; continuing (Playwright install-deps may supply it)"
+            echo "No libasound package found; continuing (playwright install-deps may supply needed libs)"
           fi
-          sudo apt-get install -y --no-install-recommends libffi8 libx264-dev || true
+          apt-cache show libffi8 >/dev/null 2>&1 && sudo apt-get install -y --no-install-recommends libffi8 || true
+          apt-cache show libx264-dev >/dev/null 2>&1 && sudo apt-get install -y --no-install-recommends libx264-dev || true
 
       - name: Install Playwright browsers
         run: |
