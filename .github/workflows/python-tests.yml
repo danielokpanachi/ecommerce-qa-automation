@@ -16,11 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python (optional; container already provides Python)
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -29,4 +24,4 @@ jobs:
       - name: Run tests with HTML report
         run: |
           mkdir -p reports
-          pytest --html=reports/report.htmlreports/report.html
+          pytest --html=reports/report.html
