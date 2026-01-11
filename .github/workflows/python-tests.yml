@@ -6,34 +6,27 @@ on:
   pull_request:
     branches: [ main ]
 
+# .github/workflows/python-tests.yml @ ref fb60c01528aec10205bcf958a21ebd318d9373b9
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    container:
+      image: mcr.microsoft.com/playwright/python:latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'  # Use your Python version
+      - name: Set up Python (optional; container already provides Python)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        playwright install
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Run tests with HTML report
-      run: |
-         # Ensure virtual X server helper is available
-         sudo apt-get update
-         sudo apt-get install -y xvfb
-
-         python -m pip install --upgrade pip
-         pip install -r requirements.txt
-         playwright install --with-deps
-
-         mkdir -p reports
-         xvfb-run -s "-screen 0 1920x1080x24" pytest --html=reports/report.html
+      - name: Run tests with HTML report
+        run: |
+          mkdir -p reports
+          pytest --html=reports/report.htmlreports/report.html
