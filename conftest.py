@@ -25,6 +25,6 @@ def page(request):
 
 
 def pytest_runtest_makereport(item, call):
-
+   
     if "page" in item.fixturenames:
         setattr(item, "rep_" + call.when, call)
