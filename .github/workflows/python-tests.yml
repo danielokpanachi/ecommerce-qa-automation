@@ -19,6 +19,16 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Disable Microsoft apt repositories (CI fix)
+        run: |
+           sudo rm -f /etc/apt/sources.list.d/azure-cli.list
+           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
+
+      - name: Update apt
+        run: sudo apt-get update
+
+   
+
       - name: Install dependencies (robust)
         run: |
           python -m pip install --upgrade pip
